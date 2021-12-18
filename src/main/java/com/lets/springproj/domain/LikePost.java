@@ -20,4 +20,6 @@ public class LikePost {
     @ManyToOne
     @JoinColumn(name = "POST_ID")
     private Post post;
+
+    private boolean likeStatus;
 }
