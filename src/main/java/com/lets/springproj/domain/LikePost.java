@@ -21,5 +21,6 @@ public class LikePost {
     @JoinColumn(name = "POST_ID")
     private Post post;
 
-    private boolean likeStatus;
+    @Enumerated
+    private LikeStatus likeStatus;
 }
