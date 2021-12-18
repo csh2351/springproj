@@ -22,8 +22,5 @@ public class Member {
     private List<LikePost> likePosts;
 
     @OneToMany(mappedBy = "member")
-    private List<ViewPost> viewPosts;
-
-    @OneToMany(mappedBy = "member")
     private List<MemberTechStack> memberTechStacks;
 }
