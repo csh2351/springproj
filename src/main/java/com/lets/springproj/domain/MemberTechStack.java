@@ -11,11 +11,25 @@ public class MemberTechStack {
     @Column(name = "MEMBER_TECH_STACK_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TAG_ID")
     private Tag tag;
+
+
+    private MemberTechStack(Tag tag){
+        this.tag = tag;
+    }
+
+    public static MemberTechStack createMemberTechStack(Tag tag){
+        MemberTechStack memberTechStack = new MemberTechStack(tag);
+
+        return memberTechStack;
+    }
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }

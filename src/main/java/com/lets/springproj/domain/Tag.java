@@ -1,14 +1,12 @@
 package com.lets.springproj.domain;
 
-import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Setter
 @Entity
 public class Tag {
     @Id @GeneratedValue
@@ -18,5 +16,20 @@ public class Tag {
     @Column(nullable = false)
     private String name;
 
-    private List<Post> posts;
+    @OneToMany(mappedBy = "tag")
+    private List<PostTechStack> posts = new ArrayList<>();
+
+    private Tag(String name){
+        this.name = name;
+    }
+
+    public static Tag createTag(String name){
+        Tag tag = new Tag(name);
+        return tag;
+    }
+
+    //==연관관계 메서드==//
+    public void addPostTechStack(PostTechStack postTechStack){
+        this.posts.add(postTechStack);
+    }
 }

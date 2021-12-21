@@ -11,11 +11,26 @@ public class PostTechStack {
     @Column(name = "POST_TECH_STACK_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POST_ID")
     private Post post;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TAG_ID")
     private Tag tag;
+
+    private PostTechStack(Tag tag){
+        this.tag = tag;
+    }
+
+    public static PostTechStack createPostTechStack(Tag tag){
+        PostTechStack postTechStack = new PostTechStack(tag);
+        tag.addPostTechStack(postTechStack);
+
+        return postTechStack;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }

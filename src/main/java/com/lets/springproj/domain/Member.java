@@ -1,11 +1,9 @@
 package com.lets.springproj.domain;
 
-import lombok.Getter;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Entity
 public class Member {
     @Id @GeneratedValue
@@ -16,11 +14,56 @@ public class Member {
     private String name;
 
     @OneToMany(mappedBy = "member")
-    private List<Post> posts;
+    private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
-    private List<LikePost> likePosts;
+    private List<LikePost> likePosts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
-    private List<MemberTechStack> memberTechStacks;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberTechStack> memberTechStacks = new ArrayList<>();
+
+    private Member(String name){
+        this.name = name;
+    }
+
+    //==연관관계 메서드==//
+    public void addPost(Post post){
+        posts.add(post);
+
+    }
+
+    //==연관관계 메서드==//
+    public void addLikePost(LikePost likePost){
+        likePosts.add(likePost);
+    }
+
+    //==연관관계 메서드==//
+    public void addMemberTechStack(MemberTechStack memberTechStack){
+
+        this.addMemberTechStack(memberTechStack);
+        memberTechStack.setMember(this);
+    }
+
+    //==생성 메서드==//
+    public static Member createMember(String name, List<MemberTechStack> memberTechStacks){
+        Member member = new Member(name);
+
+        for(MemberTechStack memberTechStack : memberTechStacks){
+            member.addMemberTechStack(memberTechStack);
+        }
+        return member;
+    }
+
+
+
+    //==필드값 변경==//
+    public void change(String name, List<MemberTechStack> memberTechStacks){
+        this.name = name;
+
+        //memberTechStacks에서 memberId로 먼저 삭제 후
+        for(MemberTechStack memberTechStack : memberTechStacks){
+            this.addMemberTechStack(memberTechStack);
+        }
+    }
+
 }
