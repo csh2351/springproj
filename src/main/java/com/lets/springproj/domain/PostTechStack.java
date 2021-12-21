@@ -1,10 +1,12 @@
 package com.lets.springproj.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Getter
+@NoArgsConstructor
 @Entity
 public class PostTechStack {
     @Id @GeneratedValue

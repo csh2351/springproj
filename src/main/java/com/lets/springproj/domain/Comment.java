@@ -1,7 +1,14 @@
 package com.lets.springproj.domain;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Getter
+@NoArgsConstructor
 @Entity
 public class Comment {
     @Id @GeneratedValue
@@ -17,6 +24,8 @@ public class Comment {
     private Post post;
 
     @Lob
+    @NotNull
+    @NotEmpty
     private String content;
 
     private Comment(Member member, Post post, String content){
