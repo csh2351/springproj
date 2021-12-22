@@ -1,7 +1,10 @@
-package com.lets.springproj.domain;
+package com.lets.domain.tag;
 
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.postTechStack.PostTechStack;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -11,7 +14,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Tag {
+public class Tag extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "TAG_ID")
     private Long id;

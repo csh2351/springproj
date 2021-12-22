@@ -1,12 +1,29 @@
-package com.lets.springproj;
+package com.lets;
 
+
+
+
+
+import com.lets.domain.comment.Comment;
+import com.lets.domain.likePost.LikePost;
+import com.lets.domain.member.Member;
+import com.lets.domain.memberTechStack.MemberTechStack;
+import com.lets.domain.post.Post;
+import com.lets.domain.postTechStack.PostTechStack;
+import com.lets.domain.tag.Tag;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 
-
+//@EnableJpaAuditing //JPA Auditing 활성화
+//@SpringBootApplication
 public class SpringprojApplication {
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
@@ -18,20 +35,20 @@ public class SpringprojApplication {
 
 		tx.begin();
 
-//		//==member 저장 테스트==//
-//		Tag tag = Tag.createTag("spring");
-//		em.persist(tag);
-//
-//
-//		List<MemberTechStack> memberTechStackList = new ArrayList<>();
-//		MemberTechStack memberTechStack = MemberTechStack.createMemberTechStack(tag);
-//		memberTechStackList.add(memberTechStack);
-//
-//		Member member = Member.createMember("member1", memberTechStackList);
-//
-//
-//		em.persist(member);
-//
+		//==member 저장 테스트==//
+		Tag tag = Tag.createTag("spring");
+		em.persist(tag);
+
+
+		List<MemberTechStack> memberTechStackList = new ArrayList<>();
+		MemberTechStack memberTechStack = MemberTechStack.createMemberTechStack(tag);
+		memberTechStackList.add(memberTechStack);
+
+		Member member = Member.createMember("member1", memberTechStackList);
+
+
+		em.persist(member);
+
 
 
 //		//==post 저장 테스트==//

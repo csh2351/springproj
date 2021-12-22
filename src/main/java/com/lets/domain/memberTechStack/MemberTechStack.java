@@ -1,5 +1,8 @@
-package com.lets.springproj.domain;
+package com.lets.domain.memberTechStack;
 
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.member.Member;
+import com.lets.domain.tag.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class MemberTechStack {
+public class MemberTechStack extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "MEMBER_TECH_STACK_ID")
     private Long id;

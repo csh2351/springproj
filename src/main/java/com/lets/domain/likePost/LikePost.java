@@ -1,4 +1,10 @@
-package com.lets.springproj.domain;
+package com.lets.domain.likePost;
+
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.member.Member;
+import com.lets.domain.post.Post;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class LikePost {
+public class LikePost extends BaseTimeEntity {
     @Id
     @GeneratedValue
     @Column(name = "LIKE_POST_ID")
