@@ -1,4 +1,8 @@
-package com.lets.springproj.domain;
+package com.lets.domain.postTechStack;
+
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.post.Post;
+import com.lets.domain.tag.Tag;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class PostTechStack {
+public class PostTechStack extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "POST_TECH_STACK_ID")
     private Long id;

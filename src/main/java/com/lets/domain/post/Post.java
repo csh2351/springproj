@@ -1,4 +1,12 @@
-package com.lets.springproj.domain;
+package com.lets.domain.post;
+
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.comment.Comment;
+import com.lets.domain.member.Member;
+import com.lets.domain.postTechStack.PostTechStack;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +20,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Post {
+public class Post extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "POST_ID")
     private Long id;

@@ -1,4 +1,11 @@
-package com.lets.springproj.domain;
+package com.lets.domain.comment;
+
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.post.Post;
+import com.lets.domain.member.Member;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Comment {
+public class Comment extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "COMMENT_ID")
     private Long id;
