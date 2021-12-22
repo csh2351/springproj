@@ -1,11 +1,23 @@
-package com.lets.springproj.domain;
+package com.lets.domain.post;
+
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.comment.Comment;
+import com.lets.domain.member.Member;
+import com.lets.domain.postTechStack.PostTechStack;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@NoArgsConstructor
 @Entity
-public class Post {
+public class Post extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "POST_ID")
     private Long id;
@@ -27,11 +39,19 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private PostStatus status;
 
+    @NotNull
+    @NotEmpty
+    private String title;
+
     @Lob
+    @NotNull
+    @NotEmpty
     private String content;
 
-    private Post(Member member, String content){
+    private Post(Member member, String title, String content){
         this.member = member;
+        this.title = title;
+        this.content = content;
         this.likeCount = 0L;
         this.viewCount = 0L;
         status = PostStatus.RECRUITING;
@@ -51,8 +71,8 @@ public class Post {
     }
 
     //==생성 메서드==//
-    public static Post createPost(Member member, String content, List<PostTechStack> postTechStacks){
-        Post post = new Post(member, content);
+    public static Post createPost(Member member, String title, String content, List<PostTechStack> postTechStacks){
+        Post post = new Post(member, title, content);
 
         for(PostTechStack postTechStack : postTechStacks){
             post.addPostTechStack(postTechStack);
@@ -72,6 +92,10 @@ public class Post {
         this.likeCount--;
     }
 
+    //==조회수 증가==//
+    public void addView(){
+        this.viewCount++;
+    }
 
     //==필드 변경==//
     public Post change(String content, PostStatus postStatus){

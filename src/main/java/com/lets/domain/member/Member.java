@@ -1,16 +1,28 @@
-package com.lets.springproj.domain;
+package com.lets.domain.member;
+
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.likePost.LikePost;
+import com.lets.domain.post.Post;
+import com.lets.domain.memberTechStack.MemberTechStack;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@NoArgsConstructor
 @Entity
-public class Member {
+public class Member extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
     private Long id;
 
     @Column(nullable = false)
+    @NotEmpty
+
     private String name;
 
     @OneToMany(mappedBy = "member")
@@ -40,8 +52,9 @@ public class Member {
     //==연관관계 메서드==//
     public void addMemberTechStack(MemberTechStack memberTechStack){
 
-        this.addMemberTechStack(memberTechStack);
+        this.memberTechStacks.add(memberTechStack);
         memberTechStack.setMember(this);
+
     }
 
     //==생성 메서드==//
@@ -51,6 +64,7 @@ public class Member {
         for(MemberTechStack memberTechStack : memberTechStacks){
             member.addMemberTechStack(memberTechStack);
         }
+
         return member;
     }
 

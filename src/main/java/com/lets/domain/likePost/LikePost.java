@@ -1,9 +1,17 @@
-package com.lets.springproj.domain;
+package com.lets.domain.likePost;
+
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.member.Member;
+import com.lets.domain.post.Post;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Getter
+@NoArgsConstructor
 @Entity
-public class LikePost {
+public class LikePost extends BaseTimeEntity {
     @Id
     @GeneratedValue
     @Column(name = "LIKE_POST_ID")
@@ -23,6 +31,8 @@ public class LikePost {
     private LikePost(Member member, Post post){
         this.member = member;
         this.post = post;
+        status = LikePostStatus.INACTIVE;
+        post.addView();
     }
 
     public static LikePost createLikePost(Member member, Post post){
@@ -34,12 +44,18 @@ public class LikePost {
     }
     //==좋아요 메서드==//
     public void activateLike(){
+        if(this.status == LikePostStatus.ACTIVE){
+            throw new IllegalStateException("이미 좋아요 한 글은 좋아요가 불가능합니다.");
+        }
         this.status = LikePostStatus.ACTIVE;
         post.addLike();
     }
 
     //==좋아요 취소 메서드==//
     public void deactivateLike(){
+        if(this.status == LikePostStatus.INACTIVE) {
+            throw new IllegalStateException("이미 좋아요 취소 한 글은 좋아요 취소가 불가능합니다.");
+        }
         this.status = LikePostStatus.INACTIVE;
         post.minusLike();
     }

@@ -1,9 +1,20 @@
-package com.lets.springproj.domain;
+package com.lets.domain.comment;
+
+import com.lets.domain.BaseTimeEntity;
+import com.lets.domain.post.Post;
+import com.lets.domain.member.Member;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+@Getter
+@NoArgsConstructor
 @Entity
-public class Comment {
+public class Comment extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "COMMENT_ID")
     private Long id;
@@ -17,6 +28,8 @@ public class Comment {
     private Post post;
 
     @Lob
+    @NotNull
+    @NotEmpty
     private String content;
 
     private Comment(Member member, Post post, String content){
