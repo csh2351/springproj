@@ -12,7 +12,7 @@ public enum ErrorCode {
 
     /* 400 BAD_REQUEST : 잘못된 요청 */
     USER_ID_NOT_THE_SAME(BAD_REQUEST, "로그인 정보[ID]가 올바르지 않습니다."),
-    EMAIL_AND_AUTH_PROVIDER_NOT_THE_SAME(BAD_REQUEST, "로그인 정보[EMAIL, AUTH_PROVIDER]가 올바르지 않습니다."),
+    SOCIAL_LOGIN_ID_AND_AUTH_PROVIDER_NOT_THE_SAME(BAD_REQUEST, "로그인 정보[SOCIAL_LOGIN_ID, AUTH_PROVIDER]가 올바르지 않습니다."),
     REFRESH_TOKEN_NOT_FOUND(BAD_REQUEST, "쿠키에 리프레시 토큰이 존재하지 않습니다."),
 
 //    NOT_SUPPORTED_AUTH_PROVIDER(BAD_REQUEST, "지원하지 않는 소셜 로그인입니다."),
